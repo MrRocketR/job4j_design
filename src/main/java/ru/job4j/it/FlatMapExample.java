@@ -1,11 +1,11 @@
-package ru.job4j.iterator;
+package ru.job4j.it;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class FlatMap {
+public class FlatMapExample {
     public static void main(String[] args) {
         List<List<Integer>> data = List.of(
                 List.of(1, 2, 3),
