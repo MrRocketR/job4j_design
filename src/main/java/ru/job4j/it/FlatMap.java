@@ -35,6 +35,14 @@ public class FlatMap<T> implements Iterator<T> {
         while (flat.hasNext()) {
             System.out.println(flat.next());
         }
+        Iterator it1 = data.next();
+        System.out.println(it1);
+        it1 = data.next();
+        System.out.println(it1);
+        it1 = data.next();
+        System.out.println(it1);
+        Iterator it2 = data.next();
+        System.out.println(it2);
     }
 
 }
