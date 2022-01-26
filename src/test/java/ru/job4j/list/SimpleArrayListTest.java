@@ -35,8 +35,7 @@ public class SimpleArrayListTest {
     }
 
     @Test
-    public void whenAddMoreAndCopy()
-    {
+    public void whenAddMoreAndCopy() {
         list.add(4);
         int expected = 4;
         int result = list.get(3);
