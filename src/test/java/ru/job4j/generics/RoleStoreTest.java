@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
 public class RoleStoreTest {
 
     RoleStore store = new RoleStore();
-    User testUser = new User("1","Nikita");
+    User testUser = new User("1", "Nikita");
 
     @Test
     public void whenAddAndFindUser() {
@@ -27,10 +27,9 @@ public class RoleStoreTest {
         assertNull(result);
     }
 
-
     @Test
     public void whenReplace() {
-        User newTestUser = new User("1","Test");
+        User newTestUser = new User("1", "Test");
         store.add(testUser);
         store.replace("1", newTestUser);
         User result = (User) store.findById("1");
@@ -44,5 +43,4 @@ public class RoleStoreTest {
         User result = (User) store.findById("1");
         assertNull(result);
     }
-
 }
