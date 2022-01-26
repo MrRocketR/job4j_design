@@ -3,10 +3,9 @@ package ru.job4j.generics;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class MemStore<T extends Base> implements Store<T> {
+public class RoleStore<T extends Base> implements Store<T> {
 
     private final Map<String, T> storage = new HashMap<>();
-
     @Override
     public void add(T model) {
         storage.putIfAbsent(model.getId(), model);
