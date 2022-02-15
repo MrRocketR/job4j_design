@@ -14,22 +14,45 @@ public class MatrixIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return (row < data.length) && (column < data[row].length || row != data.length - 1);
+        while (row < data.length - 1 && data[row].length == 0 && column <= row) {
+            row++;
+            column = 0;
+        }
+        return data[row].length != 0;
     }
 
-    @Override
     public Integer next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
-        if (column >= data[row].length) {
-            row++;
-            column = 0;
-        }
-        while (data[row].length == 0) {
-            row++;
-            column = 0;
-        }
         return data[row][column++];
     }
+
+    public static void main(String[] args) {
+  /*      int[][] data = {{1}, {3, 4}, {} };
+        int[][] data2 = {{}, {1, 2}, {}};
+        int[][] data3 = {{}};
+        System.out.println(data.length);
+        System.out.println(data[2].length);
+        System.out.println("_______");
+        System.out.println(data2.length);
+        System.out.println(data2[0].length);
+        System.out.println(data2[1].length);
+        System.out.println("_______");
+        System.out.println(data3.length);
+        System.out.println(data3[0].length);
+        System.out.println("___");*/
+        int[][] in = {
+                {1}, {2, 3}
+        };
+        MatrixIt test = new MatrixIt(in);
+        System.out.println(test.next());
+        System.out.println(test.next());
+
+    }
 }
+
+/*
+В методе hasNext()  организуйте один цикл while() с условиями, при которых требуется переход на следующую строку,
+в теле цикла организуйте переход на следующую строку, в операторе return проверьте корректность найденных индексов.
+ */
