@@ -85,5 +85,4 @@ public class MatrixItTest {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
     }
-
 }
