@@ -3,36 +3,28 @@ package ru.job4j.generics;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RoleStore<T extends Base> implements Store<T> {
+public class RoleStore implements Store<Role> {
 
-    private final Map<String, T> storage = new HashMap<>();
+    private final Store<Role> store = new MemStore<>();
+
+
     @Override
-    public void add(T model) {
-        storage.putIfAbsent(model.getId(), model);
+    public void add(Role model) {
+        store.add(model);
     }
 
     @Override
-    public boolean replace(String id, T model) {
-        boolean r = false;
-        if (storage.containsKey(id)) {
-            storage.replace(id, model);
-            r = true;
-        }
-        return r;
+    public boolean replace(String id, Role model) {
+        return store.replace(id, model);
     }
 
     @Override
     public boolean delete(String id) {
-        boolean r = false;
-        if (storage.containsKey(id)) {
-            storage.remove(id);
-            r = true;
-        }
-        return r;
+        return  store.delete(id);
     }
 
     @Override
-    public T findById(String id) {
-        return storage.getOrDefault(id, null);
+    public Role findById(String id) {
+        return store.findById(id);
     }
 }

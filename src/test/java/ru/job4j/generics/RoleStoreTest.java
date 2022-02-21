@@ -11,36 +11,33 @@ import static org.junit.Assert.*;
 public class RoleStoreTest {
 
     RoleStore store = new RoleStore();
-    User testUser = new User("1", "Nikita");
+    Role testRole = new Role("1", "Warlock");
 
     @Test
     public void whenAddAndFindUser() {
-        store.add(testUser);
-        User expectedUser = (User) store.findById("1");
-        assertThat(expectedUser, is(testUser));
+        store.add(testRole);
+        assertThat(store.findById("1"), is(testRole));
     }
 
     @Test
     public void whenAddAndFindThenUserIsNull() {
-        store.add(testUser);
-        User result = (User) store.findById("10");
-        assertNull(result);
+        store.add(testRole);
+        assertNull(store.findById("10"));
     }
 
     @Test
     public void whenReplace() {
-        User newTestUser = new User("1", "Test");
-        store.add(testUser);
-        store.replace("1", newTestUser);
-        User result = (User) store.findById("1");
-        assertThat(result.getUsername(), is("Test"));
+        Role replacedRole= new Role("1", "Warrior");
+        store.add(testRole);
+        store.replace("1", replacedRole);
+        assertThat(replacedRole.getRoleName(), is("Warrior"));
     }
 
     @Test
     public void whenDeleteUserThenUserIsNull() {
-        store.add(testUser);
+        store.add(testRole);
         store.delete("1");
-        User result = (User) store.findById("1");
+        Role result = store.findById("1");
         assertNull(result);
     }
 }
