@@ -27,7 +27,7 @@ public class RoleStoreTest {
 
     @Test
     public void whenReplace() {
-        Role replacedRole= new Role("1", "Warrior");
+        Role replacedRole = new Role("1", "Warrior");
         store.add(testRole);
         store.replace("1", replacedRole);
         assertThat(replacedRole.getRoleName(), is("Warrior"));
