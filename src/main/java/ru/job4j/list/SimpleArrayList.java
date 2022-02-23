@@ -20,7 +20,7 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public void add(T value) {
         if (size >= container.length) {
-            container = Arrays.copyOf(container, container.length + 10);
+            container = Arrays.copyOf(container, container.length * 2);
         }
         container[size] = value;
         size++;
