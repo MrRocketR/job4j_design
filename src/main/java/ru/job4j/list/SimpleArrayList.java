@@ -98,13 +98,4 @@ public class SimpleArrayList<T> implements List<T> {
 
         };
     }
-
-    public static void main(String[] args) {
-        SimpleArrayList<Integer> test = new SimpleArrayList<>(0);
-        test.add(5);
-        test.add(6);
-        test.add(7);
-        System.out.println(test.iterator().hasNext());
-
-    }
 }
