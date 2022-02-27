@@ -28,5 +28,6 @@ public class SimpleLinkedList<E> implements List<E> {
         nodeList[1] = n2;
         nodeList[2] = n3;
         System.out.println(nodeList[0].getData());
+
     }
 }
