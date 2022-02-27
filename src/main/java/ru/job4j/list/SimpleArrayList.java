@@ -35,7 +35,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     }
     private void check(int index) {
-       Objects.checkIndex(index, container.length);
+       Objects.checkIndex(index, size);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SimpleArrayList<T> implements List<T> {
                 container.length - index - 1);
         container[container.length - 1] = null;
         size--;
-        modCount--;
+        modCount++;
         return value;
     }
 
