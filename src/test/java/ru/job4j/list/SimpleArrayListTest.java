@@ -96,4 +96,42 @@ public class SimpleArrayListTest {
         list.iterator().next();
     }
 
+    @Test
+    public void whenGetIteratorTwiceThenStartAlwaysFromBeginning() {
+        System.out.println(list.get(0));
+        Assert.assertEquals(Integer.valueOf(1), list.iterator().next());
+        Assert.assertEquals(Integer.valueOf(1), list.iterator().next());
+    }
+
+    @Test
+    public void whenCheckIterator() {
+        Iterator<Integer> iterator = list.iterator();
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(Integer.valueOf(1), iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(Integer.valueOf(2), iterator.next());
+        Assert.assertTrue(iterator.hasNext());
+        Assert.assertEquals(Integer.valueOf(3), iterator.next());
+        Assert.assertFalse(iterator.hasNext());
+
+    }
+
+    @Test
+    public void whenNoPlaceThenMustIncreaseCapacity() {
+        IntStream.range(3, 10).forEach(v -> list.add(v));
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenAddAfterGetIteratorThenMustBeException() {
+        Iterator<Integer> iterator = list.iterator();
+        list.add(4);
+        iterator.next();
+    }
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenRemoveAfterGetIteratorThenMustBeException() {
+        Iterator<Integer> iterator = list.iterator();
+        list.add(0);
+        iterator.next();
+    }
+
 }
