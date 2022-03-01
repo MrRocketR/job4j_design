@@ -32,10 +32,6 @@ public class SimpleArrayList<T> implements List<T> {
             container = Arrays.copyOf(container, container.length * 2);
         }
         return container;
-
-    }
-    private void check(int index) {
-       Objects.checkIndex(index, size);
     }
 
     @Override
@@ -48,7 +44,6 @@ public class SimpleArrayList<T> implements List<T> {
     @Override
     public T remove(int index) {
         T value = get(index);
-        container[index] = null;
         System.arraycopy(
                 container,
                 index + 1,
@@ -63,7 +58,7 @@ public class SimpleArrayList<T> implements List<T> {
 
     @Override
     public T get(int index) {
-        check(index);
+        Objects.checkIndex(index, size);
         return container[index];
     }
 
@@ -85,11 +80,11 @@ public class SimpleArrayList<T> implements List<T> {
 
             @Override
             public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
+                }
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
                 }
                 return container[point++];
             }
