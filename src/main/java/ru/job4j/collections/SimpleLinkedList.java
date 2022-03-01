@@ -10,21 +10,24 @@ public class SimpleLinkedList<E> implements List<E> {
 
     private int size;
     private int modCount;
-    public ArrayList<Node> nodeList = new ArrayList<Node>();
-    Node header = null;
+    private Node<E> first = null;
 
 
     @Override
     public void add(E value) {
         if (size == 0) {
-            Node<E> newNode = new Node<>(value, null, null);
+            Node newNode  = new Node(value);
+            first = newNode;
+            size++;
             modCount++;
         } else {
-            Node<E> newNode = new Node<>(value, header.next, header.prev);
+            Node newNode  = new Node(value);
+            first.next = newNode;
+            size++;
+            modCount++;
         }
 
-
-    }
+         }
 
     @Override
     public E get(int index) {
@@ -38,16 +41,20 @@ public class SimpleLinkedList<E> implements List<E> {
     private static class Node<E> {
         E element;
         Node<E> next;
-        Node<E> prev;
 
-        Node(E element, Node<E> next, Node<E> prev) {
+        public Node(E element) {
             this.element = element;
-            this.next = next;
-            this.prev = prev;
         }
     }
 
     public static void main(String[] args) {
+        SimpleLinkedList<Integer> list = new SimpleLinkedList<>();
+        list.add(2);
+        list.add(3);
+        System.out.println(list.size);
+        System.out.println(list.first);
+
+
 
     }
 }
