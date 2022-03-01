@@ -26,7 +26,6 @@ public class SimpleLinkedList<E> implements List<E> {
 
     }
 
-
     @Override
     public E get(int index) {
         return null;
@@ -46,5 +45,9 @@ public class SimpleLinkedList<E> implements List<E> {
             this.next = next;
             this.prev = prev;
         }
+    }
+
+    public static void main(String[] args) {
+
     }
 }
