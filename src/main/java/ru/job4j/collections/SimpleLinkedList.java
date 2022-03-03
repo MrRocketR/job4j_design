@@ -2,59 +2,81 @@ package ru.job4j.collections;
 
 import ru.job4j.generics.Node;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Objects;
+import java.util.*;
 
 public class SimpleLinkedList<E> implements List<E> {
 
     private int size;
     private int modCount;
-    private Node<E> first = null;
+     private Node<E> first = null;
+     private Node<E> last = null;
 
 
     @Override
     public void add(E value) {
-        if (size == 0) {
-            Node newNode  = new Node(value);
+        Node<E> l = last;
+        Node<E> newNode = new Node<>(l, value, null);
+        last = newNode;
+        if (l== null) {
             first = newNode;
             size++;
             modCount++;
         } else {
-            Node newNode  = new Node(value);
-            first.next = newNode;
+            l.next = newNode;
             size++;
             modCount++;
         }
-
          }
 
     @Override
     public E get(int index) {
-        return null;
+        Objects.checkIndex(index, size);
+        Node<E> outPut = first;
+        for (int i = 0; i < index; i++) {
+            outPut = outPut.next;
+        }
+        return outPut.item;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
-    }
-    private static class Node<E> {
-        E element;
-        Node<E> next;
+        return new Iterator<E>() {
+            SimpleLinkedList.Node<E> iteratorNode = first;
+            int expectedModCount = modCount;
+            int index = 0;
+            @Override
+            public boolean hasNext() {
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                return iteratorNode != null;
+            }
 
-        public Node(E element) {
-            this.element = element;
+            @Override
+            public E next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                } if (index != 0 ) {
+                    iteratorNode = iteratorNode.next;
+                    index++;
+                } else {
+                    index++;
+                }
+                return iteratorNode.item;
+            }
+
+        };
+    }
+
+        private static class Node<E> {
+            E item;
+            Node<E> next;
+            Node<E> prev;
+
+            Node(Node<E> prev, E element, Node<E> next) {
+                this.item = element;
+                this.next = next;
+                this.prev = prev;
+            }
         }
-    }
-
-    public static void main(String[] args) {
-        SimpleLinkedList<Integer> list = new SimpleLinkedList<>();
-        list.add(2);
-        list.add(3);
-        System.out.println(list.size);
-        System.out.println(list.first);
-
-
-
-    }
 }
