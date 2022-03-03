@@ -17,7 +17,7 @@ public class SimpleLinkedList<E> implements List<E> {
         Node<E> l = last;
         Node<E> newNode = new Node<>(l, value, null);
         last = newNode;
-        if (l== null) {
+        if (l == null) {
             first = newNode;
             size++;
             modCount++;
@@ -56,7 +56,8 @@ public class SimpleLinkedList<E> implements List<E> {
             public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
-                } if (index != 0 ) {
+                }
+                if (index != 0) {
                     iteratorNode = iteratorNode.next;
                     index++;
                 } else {
