@@ -42,7 +42,7 @@ public class SimpleLinkedList<E> implements List<E> {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             SimpleLinkedList.Node<E> iteratorNode = first;
-            int expectedModCount = modCount;
+            final int expectedModCount = modCount;
             int index = 0;
             @Override
             public boolean hasNext() {
@@ -80,4 +80,17 @@ public class SimpleLinkedList<E> implements List<E> {
                 this.prev = prev;
             }
         }
+
+    public static void main(String[] args) {
+        SimpleLinkedList<Integer> list = new SimpleLinkedList<>();
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(10);
+        Iterator<Integer> iterator = list.iterator();
+        System.out.println(iterator.next());
+        System.out.println(iterator.next());
+        System.out.println(iterator.hasNext());
+        System.out.println(iterator.next());
+    }
 }
