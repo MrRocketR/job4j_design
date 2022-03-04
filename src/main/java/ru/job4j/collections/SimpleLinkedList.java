@@ -41,9 +41,8 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            SimpleLinkedList.Node<E> iteratorNode = first;
+            SimpleLinkedList.Node<E> iteratorNode = new SimpleLinkedList.Node<>(null, null, first);
             final int expectedModCount = modCount;
-            int index = 0;
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
@@ -57,12 +56,7 @@ public class SimpleLinkedList<E> implements List<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                if (index != 0) {
-                    iteratorNode = iteratorNode.next;
-                    index++;
-                } else {
-                    index++;
-                }
+                iteratorNode = iteratorNode.next;
                 return iteratorNode.item;
             }
 
