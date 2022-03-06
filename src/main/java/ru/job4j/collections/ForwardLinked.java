@@ -21,14 +21,22 @@ public class ForwardLinked<T> implements Iterable<T> {
 
     public T deleteFirst() {
         T value;
-        if (head != null) {
-            Node<T> temp = head.next;
-            value = head.value;
-            head = null;
-            head = temp;
-        } else {
+        if (head == null) {
             throw new NoSuchElementException();
         }
+        if (head.next == null) {
+            head.value = null;
+            head = null;
+            value = null;
+        } else {
+            Node<T> temp = head.next;
+            head.next = null;
+            value = head.value;
+            head.value = null;
+            head = null;
+            head = temp;
+        }
+
         return value;
     }
     public void addFirst(T value) {
@@ -72,6 +80,14 @@ public class ForwardLinked<T> implements Iterable<T> {
             this.value = value;
             this.next = next;
         }
+    }
+
+    public static void main(String[] args) {
+        ForwardLinked fl = new ForwardLinked();
+        fl.add(2);
+        fl.add(14);
+        System.out.println(fl.head.value);
+        System.out.println(fl.deleteFirst());
     }
 }
 
