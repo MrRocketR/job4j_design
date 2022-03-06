@@ -1,16 +1,21 @@
 package ru.job4j.collections;
 
-public class SimpleQueue<T> {
+import java.util.Iterator;
+
+public class SimpleQueue<T>  {
     private final SimpleStack<T> in = new SimpleStack<>();
     private final SimpleStack<T> out = new SimpleStack<>();
 
     public T poll() {
-        return null;
+        if (out.isEmpty()) {
+            while (!in.isEmpty()) {
+                out.push(in.pop());
+            }
+        }
+        return out.pop();
     }
 
     public void push(T value) {
-        if (in.pop() != null) {
-            in.push(value);
-        }
+        in.push(value);
     }
 }
