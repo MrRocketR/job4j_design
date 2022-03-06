@@ -1,6 +1,6 @@
 package ru.job4j.collections;
 
-import ru.job4j.generics.Node;
+
 
 import java.util.*;
 
@@ -41,7 +41,7 @@ public class SimpleLinkedList<E> implements List<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            SimpleLinkedList.Node<E> iteratorNode = new SimpleLinkedList.Node<>(null, null, first);
+            Node<E> iteratorNode = new Node<>(null, null, first);
             final int expectedModCount = modCount;
             @Override
             public boolean hasNext() {
