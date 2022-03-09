@@ -46,7 +46,7 @@ public class ListUtilsTest {
     public void whenDeleteSameElements() {
         List<Integer> input = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
         List<Integer> el = new ArrayList<>(Arrays.asList(0, 2, 1, -4));
-        ListUtils.removeAll(input,el);
+        ListUtils.removeAll(input, el);
         assertThat(input, Is.is(Arrays.asList(3, 4)));
     }
 }

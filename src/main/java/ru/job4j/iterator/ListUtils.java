@@ -48,7 +48,7 @@ public class ListUtils {
         }
     }
 
-    public static <T> void removeAll(List<T> list, List<T> elements) {
+    public static <T> void removeAll(List<T> list,  List<T> elements) {
         for (T e: elements) {
             ListIterator<T> iterator = list.listIterator();
             while (iterator.hasNext()) {
