@@ -5,8 +5,7 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MapUsage {
-
+public class UsageHash {
     public static void main(String[] args) {
         Calendar c = new GregorianCalendar(1990, 12, 21);
         User user1 = new User("Ivan", 2, c);
