@@ -22,7 +22,6 @@ public class SimpleTree<E> implements Tree<E> {
         }
         return rsl;
     }
-
     @Override
     public Optional<Node<E>> findBy(E value) {
         Optional<Node<E>> rsl = Optional.empty();
