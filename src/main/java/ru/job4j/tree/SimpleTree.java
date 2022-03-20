@@ -11,15 +11,13 @@ public class SimpleTree<E> implements Tree<E> {
 
     @Override
     public boolean add(E parent, E child) {
-        boolean rsl = false;
-        Optional<Node<E>> result;
-        Optional<Node<E>> childCheck;
-        result = findBy(parent);
-        childCheck = findBy(child);
-        if (result.isPresent() && childCheck.isEmpty()) {
-            Node<E> node = result.get();
+        Optional<Node<E>> parentCheck = findBy(parent);
+        Optional<Node<E>> childCheck = findBy(child);
+        boolean rsl = parentCheck.isPresent()
+                && childCheck.isEmpty();
+        if (rsl) {
+            Node<E> node = parentCheck.get();
             node.children.add(new Node<>(child));
-            rsl = true;
         }
         return rsl;
     }
