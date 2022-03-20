@@ -29,14 +29,9 @@ public class Analize {
     private static int changed(Set<User> previous, Set<User> current) {
         int out = 0;
         for (User user: previous) {
-            Iterator<User> iterator = current.iterator();
-            while (iterator.hasNext()) {
-                int id = user.getId();
-                String name = user.getName();
-                User newUser = iterator.next();
-                int newUserId = newUser.getId();
-                String newUserName = newUser.getName();
-                if (id == newUserId && !name.equals(newUserName)) {
+            for (User currentUser: current) {
+                if (user.getId() == currentUser.getId()
+                        && !user.getName().equals(currentUser.getName())) {
                     out++;
                 }
             }
