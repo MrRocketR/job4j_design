@@ -13,12 +13,13 @@ public class SimpleTree<E> implements Tree<E> {
     public boolean add(E parent, E child) {
         boolean rsl = false;
         Optional<Node<E>> result;
+        Optional<Node<E>> childCheck;
         result = findBy(parent);
-        if (result.get().children.contains(child) && result.isPresent()) {
-            rsl = false;
-        } else {
-            Node<E> node =  result.get();
+        childCheck = findBy(child);
+        if (result.isPresent() && childCheck.isEmpty()) {
+            Node<E> node = result.get();
             node.children.add(new Node<>(child));
+            rsl = true;
         }
         return rsl;
     }
@@ -36,14 +37,5 @@ public class SimpleTree<E> implements Tree<E> {
             data.addAll(el.children);
         }
         return rsl;
-    }
-
-    public static void main(String[] args) {
-        Tree<Integer> tree = new SimpleTree<>(1);
-        tree.add(1, 2);
-        tree.add(1, 3);
-        tree.add(1, 4);
-        tree.add(4, 5);
-        tree.add(5, 6);
     }
 }
