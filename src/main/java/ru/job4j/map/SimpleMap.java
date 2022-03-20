@@ -45,20 +45,24 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     private void expand() {
         if (count >= capacity * LOAD_FACTOR) {
+            capacity = capacity * 2;
             reHash();
         }
     }
     private void reHash() {
-        SimpleMap newSM = new SimpleMap();
-        newSM.table = Arrays.copyOf(newSM.table,  table.length * 2);
+        MapEntry<K, V>[] temp = new MapEntry[capacity];
         for (int i = 0; i < table.length - 1; i++) {
             if (table[i] != null) {
                 K key = table[i].key;
-                V value = table[i].value;
-                newSM.put(key, value);
+                int hashCode = key.hashCode();
+                int hash = hash(hashCode);
+                int index = indexFor(hash);
+                if (temp[index] == null) {
+                    table[index] = table[i];
+                }
             }
         }
-        table = newSM.table;
+        table = temp;
     }
 
     @Override
