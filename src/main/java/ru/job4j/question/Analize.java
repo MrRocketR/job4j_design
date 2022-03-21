@@ -12,6 +12,7 @@ public class Analize {
         result.setAdded(added);
         result.setChanged(changed);
         result.setDeleted(deleted);
+        System.out.println(result.getChanged());
         return result;
 
     }
@@ -26,18 +27,22 @@ public class Analize {
        }
            return out;
     }
+
     private static int changed(Set<User> previous, Set<User> current) {
         int out = 0;
-        for (User user: previous) {
-            for (User currentUser: current) {
-                if (user.getId() == currentUser.getId()
-                        && !user.getName().equals(currentUser.getName())) {
-                    out++;
-                }
+        Map<Integer, String> list = new HashMap<>();
+        for (User user : previous) {
+            list.put(user.getId(), user.getName());
+        }
+        for (User user : current) {
+            String temp = list.get(user.getId());
+            if (temp != null && !temp.equals(user.getName())) {
+                out++;
             }
         }
         return out;
     }
+
     private static int deleted(Set<User> previous, Set<User> current)  {
         int out = 0;
         ArrayList<Integer> idList = getIdList(current);
@@ -51,10 +56,9 @@ public class Analize {
 
     private static ArrayList<Integer> getIdList(Set<User> userSet) {
         ArrayList<Integer> idList = new ArrayList<>();
-        Iterator<User> iterator = userSet.iterator();
-        while (iterator.hasNext()) {
-            int prev = iterator.next().getId();
-            idList.add(prev);
+        for (User user : userSet) {
+            int id = user.getId();
+            idList.add(id);
         }
         return idList;
     }
