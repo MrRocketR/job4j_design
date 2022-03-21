@@ -17,5 +17,6 @@ public interface Tree<E> {
         public Node(E value) {
             this.value = value;
         }
+
     }
 }
