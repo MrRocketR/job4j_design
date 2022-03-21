@@ -16,8 +16,7 @@ public class SimpleTree<E> implements Tree<E> {
         boolean rsl = parentCheck.isPresent()
                 && childCheck.isEmpty();
         if (rsl) {
-            Node<E> node = parentCheck.get();
-            node.children.add(new Node<>(child));
+            parentCheck.get().children.add(new Node<>(child));
         }
         return rsl;
     }
