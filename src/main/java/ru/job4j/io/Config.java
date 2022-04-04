@@ -23,6 +23,7 @@ public class Config {
         try (BufferedReader in = new BufferedReader(new FileReader("app.properties"))) {
             list = in.lines().collect(Collectors.toList());
             for (String s: list) {
+                String[] arr = s.split("\\.");
                 if (s.contains("username")) {
                     int i = s.indexOf("=");
                     key = s.substring(s.indexOf("=") + 1);
