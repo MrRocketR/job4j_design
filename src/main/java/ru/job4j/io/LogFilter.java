@@ -6,17 +6,17 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class LogFilter {
-    List<String> s = new ArrayList<>();
     List<String> out = new ArrayList<>();
     public List<String> filter(String file) {
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
-            s = in.lines().collect(Collectors.toList());
-            for (String s1: s) {
-                String[] arr = s1.split("\\s");
+            String line;
+            while ((line = in.readLine()) != null) {
+                String[] arr = line.split("\\s");
                 if (arr[8].equals("404")) {
-                    out.add(s1);
+                    out.add(line);
                 }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class LogFilter {
         for (String test: log) {
             System.out.println(test);
         }
-        save(log, "404.txt");
+       save(log, "404.txt");
 
     }
 
