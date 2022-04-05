@@ -17,21 +17,29 @@ public class Config {
     }
 
     public void load() {
-        List<String> list = new ArrayList<>();
-        String key;
+        String key = null;
         String value;
         try (BufferedReader in = new BufferedReader(new FileReader("app.properties"))) {
-            list = in.lines().collect(Collectors.toList());
-            for (String s: list) {
-                String[] arr = s.split("\\.");
-                if (s.contains("username")) {
-                    int i = s.indexOf("=");
-                    key = s.substring(s.indexOf("=") + 1);
+            String line;
+            while ((line = in.readLine()) != null) {
+                StringBuilder stringBuilder = new StringBuilder();
+                String[] arr = line.split("\\.");
+                for (int i = 0; i < arr.length; i++) {
+                    if (arr[i].contains("=")) {
+                        int index = arr[i].indexOf("=");
+                        key = arr[i].substring(0, index);
+                        value = arr[i].substring(index + 1);
+                        stringBuilder.append(value);
+                        i++;
+                        while (i < arr.length) {
+                            stringBuilder.append(".");
+                            stringBuilder.append(arr[i]);
+                            i++;
+                        }
+                    }
                 }
-                if (s.contains("password")) {
-                    int i = s.indexOf("=");
-                    value = s.substring(s.indexOf("=") + 1);
-                }
+                value = stringBuilder.toString();
+                values.put(key, value);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -39,7 +47,7 @@ public class Config {
     }
 
     public String value(String key) {
-        throw new UnsupportedOperationException("Don't impl this method yet!");
+        return values.get(key);
     }
 
     @Override
@@ -54,7 +62,9 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("app.properties"));
+        Config config = new Config("app.properties");
+        config.load();
+
     }
 
 }
