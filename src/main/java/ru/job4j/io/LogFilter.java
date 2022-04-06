@@ -23,7 +23,18 @@ public class LogFilter {
         return out;
     }
 
-
+    public static void save(List<String> log, String file) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(file)
+                ))) {
+            for (String s: log) {
+                out.println(s);
+            }
+        } catch (IOException io) {
+            io.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
         LogFilter logFilter = new LogFilter();
@@ -31,9 +42,7 @@ public class LogFilter {
         for (String test: log) {
             System.out.println(test);
         }
-
-
+        save(log, "404.txt");
     }
-
 
 }
