@@ -3,7 +3,7 @@ package ru.job4j.io;
 import java.io.*;
 
 public class Analizy {
-    public void unavailable(String source, String target)  {
+    public void unavailable(File source, File target)  {
         try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter log = new PrintWriter(new FileOutputStream(target))) {
             String line;
@@ -29,6 +29,5 @@ public class Analizy {
 
     public static void main(String[] args) throws IOException {
         Analizy analizy = new Analizy();
-        analizy.unavailable("source.csv", "target.csv");
     }
 }
