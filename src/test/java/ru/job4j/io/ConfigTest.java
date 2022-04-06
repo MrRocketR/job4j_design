@@ -12,8 +12,8 @@ public class ConfigTest {
         String path = "D:\\projects\\job4j_design\\app.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("username"), is("postgres"));
+        assertThat(config.value("hibernate.connection.username"), is("postgres"));
         assertThat(config.value("surname"), is(Matchers.nullValue()));
-        assertThat(config.value("driver_class"), is("org.postgresql.Driver"));
+        assertThat(config.value("hibernate.connection.driver_class"), is("org.postgresql.Driver"));
     }
 }

@@ -24,14 +24,11 @@ public class Config {
             while ((line = in.readLine()) != null) {
                 if (!line.contains("#")) {
                     String[] arr = line.split("=");
-                    System.out.println(arr[0] + " ____ " + arr[1]);
-                    for (int i = 0; i < arr.length; i++) {
-                        if (arr.length > 2) {
+                        if (arr.length == 2) {
                             key = arr[0];
                             value = arr[1];
                             values.put(key, value);
                         }
-                    }
                 }
             }
         } catch (Exception e) {
@@ -57,6 +54,7 @@ public class Config {
     public static void main(String[] args) {
         Config config = new Config("app.properties");
         config.load();
+
 
     }
 
