@@ -22,24 +22,17 @@ public class Config {
         try (BufferedReader in = new BufferedReader(new FileReader("app.properties"))) {
             String line;
             while ((line = in.readLine()) != null) {
-                StringBuilder stringBuilder = new StringBuilder();
-                String[] arr = line.split("\\.");
-                for (int i = 0; i < arr.length; i++) {
-                    if (arr[i].contains("=")) {
-                        int index = arr[i].indexOf("=");
-                        key = arr[i].substring(0, index);
-                        value = arr[i].substring(index + 1);
-                        stringBuilder.append(value);
-                        i++;
-                        while (i < arr.length) {
-                            stringBuilder.append(".");
-                            stringBuilder.append(arr[i]);
-                            i++;
+                if(!line.contains("#")) {
+                    String[] arr = line.split("=");
+                    System.out.println(arr[0] + " ____ " + arr[1]);
+                    for (int i = 0; i < arr.length; i++) {
+                        if(arr.length > 2) {
+                            key = arr[0];
+                            value = arr[1];
+                            values.put(key, value);
                         }
                     }
                 }
-                value = stringBuilder.toString();
-                values.put(key, value);
             }
         } catch (Exception e) {
             e.printStackTrace();
