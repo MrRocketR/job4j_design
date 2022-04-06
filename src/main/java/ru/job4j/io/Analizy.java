@@ -4,7 +4,7 @@ import java.io.*;
 
 public class Analizy {
     public void unavailable(String source, String target)  {
-        try(BufferedReader in = new BufferedReader(new FileReader(source));
+        try (BufferedReader in = new BufferedReader(new FileReader(source));
              PrintWriter log = new PrintWriter(new FileOutputStream(target))) {
             String line;
             boolean isOffline = false;
