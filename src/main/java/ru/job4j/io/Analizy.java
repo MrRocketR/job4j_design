@@ -29,5 +29,6 @@ public class Analizy {
 
     public static void main(String[] args) throws IOException {
         Analizy analizy = new Analizy();
+        analizy.unavailable("source.csv","target.csv");
     }
 }
