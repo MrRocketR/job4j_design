@@ -16,4 +16,10 @@ public class ConfigTest {
         assertThat(config.value("surname"), is(Matchers.nullValue()));
         assertThat(config.value("hibernate.connection.driver_class"), is("org.postgresql.Driver"));
     }
+    @Test(expected = Config.IncorrectKeyValueException.class)
+    public void whenException() {
+        String path = "exception.properties";
+        Config config = new Config(path);
+        config.load();
+    }
 }

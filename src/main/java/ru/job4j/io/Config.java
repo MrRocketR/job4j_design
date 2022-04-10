@@ -17,21 +17,23 @@ public class Config {
     }
 
     public void load() {
-        String key = null;
+        String key;
         String value;
-        try (BufferedReader in = new BufferedReader(new FileReader("app.properties"))) {
+        try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = in.readLine()) != null) {
-                if (!line.contains("#")) {
+                if (!line.contains("#") && line.contains("=")) {
                     String[] arr = line.split("=");
-                        if (arr.length == 2) {
-                            key = arr[0];
-                            value = arr[1];
-                            values.put(key, value);
-                        }
+                    if (arr.length == 2) {
+                        key = arr[0];
+                        value = arr[1];
+                        values.put(key, value);
+                    } else {
+                        throw new IncorrectKeyValueException("Line Don't have Key = Value");
+                    }
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -56,6 +58,11 @@ public class Config {
         config.load();
 
 
+    }
+    public static class IncorrectKeyValueException extends ArrayIndexOutOfBoundsException {
+        public IncorrectKeyValueException(String errorMessage) {
+            super(errorMessage);
+        }
     }
 
 }
