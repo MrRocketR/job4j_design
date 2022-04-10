@@ -22,14 +22,14 @@ public class Config {
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             String line;
             while ((line = in.readLine()) != null) {
-                if (!line.contains("#") && line.contains("=")) {
+                if (!line.startsWith("#") && line.contains("=")) {
                     String[] arr = line.split("=");
-                    if (arr.length == 2) {
+                    if (arr.length < 2) {
+                        throw new IncorrectKeyValueException("Line Don't have Key = Value");
+                    } else {
                         key = arr[0];
                         value = arr[1];
                         values.put(key, value);
-                    } else {
-                        throw new IncorrectKeyValueException("Line Don't have Key = Value");
                     }
                 }
             }
