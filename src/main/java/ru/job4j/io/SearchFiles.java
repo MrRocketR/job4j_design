@@ -29,8 +29,9 @@ public class SearchFiles implements FileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        pathList.add(file.getFileName());
-        pathList = pathList.stream().filter(predicate).collect(Collectors.toList());
+       if (predicate.test(file.getFileName())) {
+           pathList.add(file.getFileName());
+       }
         return FileVisitResult.CONTINUE;
     }
 
