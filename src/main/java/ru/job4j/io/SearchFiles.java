@@ -1,4 +1,4 @@
-package ru.job4j.collections;
+package ru.job4j.io;
 
 
 
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 public class SearchFiles implements FileVisitor<Path> {
     private Predicate<Path> predicate;
-    ArrayList<Path> pathList = new ArrayList<>();
+    List<Path> pathList = new ArrayList<>();
 
     public SearchFiles(Predicate<Path> condition) {
         this.predicate = condition;
@@ -30,6 +30,7 @@ public class SearchFiles implements FileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         pathList.add(file.getFileName());
+        pathList = pathList.stream().filter(predicate).collect(Collectors.toList());
         return FileVisitResult.CONTINUE;
     }
 
@@ -46,6 +47,6 @@ public class SearchFiles implements FileVisitor<Path> {
     }
 
     public List<Path> getPaths() {
-        return pathList.stream().filter(predicate).collect(Collectors.toList());
+        return pathList;
     }
 }
