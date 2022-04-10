@@ -26,7 +26,7 @@ public class AnalizyTest {
             out.println("200 10:59:01");
         }
         Analizy analizy = new Analizy();
-        analizy.unavailable(source, target);
+        analizy.unavailable(source.getAbsolutePath(), target.getAbsolutePath());
         StringBuilder rsl = new StringBuilder();
         try (BufferedReader in = new BufferedReader(new FileReader(target))) {
             in.lines().forEach(rsl::append);
