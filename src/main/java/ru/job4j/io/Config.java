@@ -24,7 +24,9 @@ public class Config {
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("#") && line.contains("=")) {
                     String[] arr = line.split("=", 2);
-                    if (arr.length < 2) {
+                    System.out.println(arr[0]);
+                    System.out.println(arr[1]);
+                    if (arr[1] == null) {
                         throw new IncorrectKeyValueException("Line Don't have Key = Value");
                     } else {
                         key = arr[0];
