@@ -10,9 +10,9 @@ import java.nio.file.Paths;
 public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
         Path start = Paths.get("TestForDuplicates");
-        DuplicatesFinder.DuplicatesSearcher(start);
+        DuplicatesFinder.search(start);
     }
-    public static void DuplicatesSearcher (Path root) throws IOException {
+    public static void search(Path root) throws IOException {
         DuplicatesVisitor visitor = new DuplicatesVisitor();
         Files.walkFileTree(root, visitor);
         visitor.finder();

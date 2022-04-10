@@ -11,7 +11,7 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private  List<FileProperty> fileProperties = new ArrayList<>();
-    private Set <FileProperty> propertySet = new HashSet<>();
+    private Set<FileProperty> propertySet = new HashSet<>();
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         long size  = file.toFile().length();
@@ -20,7 +20,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
         return super.visitFile(file, attrs);
     }
 
-    public void finder () {
+    public void finder() {
         propertySet.addAll(fileProperties);
         for (FileProperty s : propertySet) {
             boolean firstMeet = false;
@@ -28,8 +28,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
                 if (s.equals(fileProperties.get(j))) {
                     if (!firstMeet) {
                         firstMeet = true;
-                    }
-                        else  {
+                    } else  {
                             System.out.println(fileProperties.get(j).getName());
                         }
                     }
