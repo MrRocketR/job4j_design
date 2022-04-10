@@ -26,11 +26,11 @@ public class Config {
                     String[] arr = line.split("=", 2);
                     key = arr[0];
                     value = arr[1];
-                    if (value.equals("")) {
+                    if ("".equals(value)) {
                         throw new IncorrectKeyValueException("Line Don't have Key = Value");
-                    } else {
-                        values.put(key, value);
                     }
+                        values.put(key, value);
+
                 }
             }
         } catch (IOException e) {
