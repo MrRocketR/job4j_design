@@ -23,7 +23,7 @@ public class Config {
             String line;
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("#") && line.contains("=")) {
-                    String[] arr = line.split("=");
+                    String[] arr = line.split("=", 2);
                     if (arr.length < 2) {
                         throw new IncorrectKeyValueException("Line Don't have Key = Value");
                     } else {
