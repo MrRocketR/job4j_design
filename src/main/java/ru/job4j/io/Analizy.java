@@ -10,12 +10,12 @@ public class Analizy {
             boolean isOffline = false;
             while ((line = in.readLine()) != null) {
                 String[] arr = line.split("\\s");
-                if (!isOffline &&  (arr[0].equals("500") || arr[0].equals("400"))) {
+                if (!isOffline &&  ("500".equals(arr[0]) || "400".equals(arr[0]))) {
                     isOffline = true;
                     log.write(arr[1]);
                     log.write(";");
                 }
-                if (isOffline &&  arr[0].equals("200")) {
+                if (isOffline && "200".equals(arr[0])) {
                     isOffline = false;
                     log.write(arr[1]);
                     log.write(";");
