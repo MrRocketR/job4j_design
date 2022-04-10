@@ -24,13 +24,11 @@ public class Config {
             while ((line = in.readLine()) != null) {
                 if (!line.startsWith("#") && line.contains("=")) {
                     String[] arr = line.split("=", 2);
-                    System.out.println(arr[0]);
-                    System.out.println(arr[1]);
-                    if (arr[1] == null) {
+                    key = arr[0];
+                    value = arr[1];
+                    if (value.equals("")) {
                         throw new IncorrectKeyValueException("Line Don't have Key = Value");
                     } else {
-                        key = arr[0];
-                        value = arr[1];
                         values.put(key, value);
                     }
                 }
@@ -55,12 +53,6 @@ public class Config {
         return out.toString();
     }
 
-    public static void main(String[] args) {
-        Config config = new Config("app.properties");
-        config.load();
-
-
-    }
     public static class IncorrectKeyValueException extends ArrayIndexOutOfBoundsException {
         public IncorrectKeyValueException(String errorMessage) {
             super(errorMessage);
