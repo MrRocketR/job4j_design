@@ -9,7 +9,7 @@ import java.nio.file.Paths;
 
 public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("TestForDuplicates");
+        Path start = Paths.get("./");
         DuplicatesFinder.search(start);
     }
     public static void search(Path root) throws IOException {
