@@ -11,14 +11,22 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("TestPaths");
-        List<Path> testList =   search(start, p -> p.toFile().getName().endsWith(".js"));
+        validation(args.length);
+        Path start = Paths.get(args[0]);
+        List<Path> testList =   search(start, p -> p.toFile().getName().endsWith(args[1]));
         System.out.println(testList);
+
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
+    }
+
+    public static void validation(int check) {
+        if (check != 2) {
+            throw new IllegalArgumentException("Root folder is null or file type is null");
+        }
     }
 }
