@@ -11,29 +11,25 @@ import java.util.*;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     private  List<FileProperty> fileProperties = new ArrayList<>();
-    private Set<FileProperty> propertySet = new HashSet<>();
+    private Stack<FileProperty> stack = new Stack<>();
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         long size  = file.toFile().length();
         String name = file.getFileName().toString();
-        fileProperties.add(new FileProperty(size, name));
+        stack.push(new FileProperty(size, name, file));
         return super.visitFile(file, attrs);
     }
 
     public void finder() {
-        propertySet.addAll(fileProperties);
-        for (FileProperty s : propertySet) {
-            boolean firstMeet = false;
-            for (int j = 0; j < fileProperties.size(); j++) {
-                if (s.equals(fileProperties.get(j))) {
-                    if (!firstMeet) {
-                        firstMeet = true;
-                    } else  {
-                            System.out.println(fileProperties.get(j).getName());
-                        }
-                    }
-                }
+        while (!stack.isEmpty()) {
+            FileProperty temp = stack.pop();
+            if (stack.contains(temp) || fileProperties.contains(temp)) {
+               fileProperties.add(temp);
             }
         }
+        for (FileProperty fl:fileProperties) {
+            System.out.println(fl.getPath());
+        }
     }
+}
 

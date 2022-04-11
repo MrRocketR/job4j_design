@@ -1,5 +1,6 @@
 package ru.job4j.io.duplicates;
 
+import java.nio.file.Path;
 import java.util.Objects;
 
 public class FileProperty {
@@ -8,9 +9,12 @@ public class FileProperty {
 
     private String name;
 
-    public FileProperty(long size, String name) {
+    private Path path;
+
+    public FileProperty(long size, String name, Path path) {
         this.size = size;
         this.name = name;
+        this.path = path;
     }
 
     public long getSize() {
@@ -44,5 +48,13 @@ public class FileProperty {
     @Override
     public int hashCode() {
         return Objects.hash(size, name);
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public void setPath(Path path) {
+        this.path = path;
     }
 }
