@@ -16,20 +16,31 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String s:args) {
+            argumentsCheck(s);
             int startKey = s.indexOf('-');
             int endKey = s.indexOf('=');
             String key = s.substring(startKey + 1, endKey);
             String value = s.substring(endKey + 1);
-            if ("".equals(value)) {
+            if ("".equals(key) || "".equals(value)) {
                 throw new IllegalArgumentException();
             }
             values.put(key, value);
         }
     }
+    private void argumentsCheck(String argument) {
+        if (!argument.contains("=") || !argument.contains("-")) {
+            throw new IllegalArgumentException();
+        }
+    }
+
 
     public static ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
-        names.parse(args);
+        if (args.length > 0) {
+            names.parse(args);
+        } else {
+            throw new IllegalArgumentException();
+        }
         return names;
     }
 
