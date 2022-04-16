@@ -1,7 +1,5 @@
 package ru.job4j.io;
 
-
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +9,9 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        validation(args.length);
+        validation(args);
         Path start = Paths.get(args[0]);
-        List<Path> testList =   search(start, p -> p.toFile().getName().endsWith(args[1]));
+        List<Path> testList = search(start, p -> p.toFile().getName().endsWith(args[1]));
         System.out.println(testList);
 
     }
@@ -24,9 +22,16 @@ public class Search {
         return searcher.getPaths();
     }
 
-    public static void validation(int check) {
-        if (check != 2) {
-            throw new IllegalArgumentException("Root folder is null or file type is null");
+    public static void validation(String[] arr) {
+        if (arr.length != 2) {
+            throw new IllegalArgumentException("Invalid number of arguments");
+        }
+        if (null == arr[0]) {
+                throw new IllegalArgumentException("Root folder is null");
+        }
+        if (null == arr[1]) {
+                throw new IllegalArgumentException("File type is null");
+        }
         }
     }
-}
+
