@@ -33,7 +33,6 @@ public class ArgsName {
         }
     }
 
-
     public static ArgsName of(String[] args) {
         ArgsName names = new ArgsName();
         if (args.length > 0) {
@@ -54,4 +53,6 @@ public class ArgsName {
         ArgsName req = ArgsName.of(new String[] {"-request=?msg=Exit="});
         System.out.println(req.get("request"));
     }
+
+
 }
