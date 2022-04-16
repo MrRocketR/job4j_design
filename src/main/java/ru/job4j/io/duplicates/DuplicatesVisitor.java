@@ -30,7 +30,7 @@ public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
     public void finder() {
         for (Map.Entry<FileProperty, List<Path>> entry : filePropertyListMap.entrySet()) {
             if (entry.getValue().size() > 1) {
-                System.out.println(entry.getValue());
+               entry.getValue().stream().forEach(System.out::println);
             }
         }
 
