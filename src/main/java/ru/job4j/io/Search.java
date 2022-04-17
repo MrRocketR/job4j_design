@@ -28,7 +28,7 @@ public class Search {
             throw new IllegalArgumentException("Invalid number of arguments");
         }
         File file = new File(arr[0]);
-        if (!file.exists()) {
+        if (!file.exists() && !file.isDirectory()) {
             throw new IllegalArgumentException("Wrong directory!");
         }
         if (!arr[1].startsWith(".")) {
