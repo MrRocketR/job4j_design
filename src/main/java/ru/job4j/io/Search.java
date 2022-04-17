@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -26,11 +27,12 @@ public class Search {
         if (arr.length != 2) {
             throw new IllegalArgumentException("Invalid number of arguments");
         }
-        if (null == arr[0]) {
-                throw new IllegalArgumentException("Root folder is null");
+        File file = new File(arr[0]);
+        if (!file.exists()) {
+            throw new IllegalArgumentException("Wrong directory!");
         }
-        if (null == arr[1]) {
-                throw new IllegalArgumentException("File type is null");
+        if (!arr[1].startsWith(".")) {
+            throw new IllegalArgumentException("Wrong filetype or filename extension");
         }
         }
     }
