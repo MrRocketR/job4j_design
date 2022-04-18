@@ -2,33 +2,53 @@ package ru.job4j.io.scanner;
 
 import ru.job4j.io.ArgsName;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.util.regex.Pattern;
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
-    String param1 = argsName.get("path");
-    String param2 = argsName.get("delimiter");
-    String param3 = argsName.get("out");
-    String param4 = argsName.get("filter");
-    Scanner scanner = new Scanner(new File(param1));
-
+        String param1 = argsName.get("path");
+        String param2 = argsName.get("delimiter");
+        String param3 = argsName.get("out");
+        String param4 = argsName.get("filter");
+        Scanner scanner = new Scanner(new FileReader(param1)).useDelimiter(param2);
+        System.out.println(scanner.nextLine());
+        System.out.println("_______");
+        if (!param3.equals("stdout")) {
+            File outFile = new File(param3);
+            try (PrintWriter out = new PrintWriter(
+                    new BufferedOutputStream(
+                            new FileOutputStream(outFile)
+                    ))) {
+                while (scanner.hasNext()) {
+                    String next = scanner.next();
+                    String next2 = scanner.nextLine();
+                    System.out.println(next2);
+                    System.out.println("Current word is =" + next);
+                    if (param4.contains(next)) {
+                        System.out.println("Here + " + next);
+                        out.print(next);
+                        out.print(";");
+                        out.print(System.lineSeparator());
+                    }
+                }
+            }
+        }
+        if (param3.equals("stdout")) {
+            while (scanner.hasNext()) {
+                String next = scanner.next();
+                System.out.println(next);
+                if (next.contains(param4)) {
+                    System.out.println(next);
+                }
+            }
+        }
+        scanner.close();
     }
-
-}
-/*
-
-В качестве входных данных задается путь к файлу path, разделитель delimiter, приемник данных out и фильтр по столбцам filter.
-Ключ -out имеет только два допустимых значения stdout или путь к файлу, куда нужно вывести.
-Например, если есть файл CSV со столбцами name, age, birthDate, education, children и программа запускается таким образом:
-
-java -jar target/csvReader.jar -path=file.csv -delimiter=";"  -out=stdout -filter=name,age
-
-то программа должна прочитать файл по пути file.csv
-и вывести только столбцы name, age в консоль. В качестве разделителя данных выступает ;
- */
+    }
