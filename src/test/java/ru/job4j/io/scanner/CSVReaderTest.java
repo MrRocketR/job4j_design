@@ -33,10 +33,10 @@ public class CSVReaderTest {
         Files.writeString(file.toPath(), data);
         String expected = String.join(
                 System.lineSeparator(),
-                "name;age",
-                "Tom;20",
-                "Jack;25",
-                "William;30"
+                "name;age;",
+                "Tom;20;",
+                "Jack;25;",
+                "William;30;"
         ).concat(System.lineSeparator());
         CSVReader.handle(argsName);
         Assert.assertEquals(expected, Files.readString(target.toPath()));

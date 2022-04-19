@@ -3,13 +3,8 @@ package ru.job4j.io.scanner;
 import ru.job4j.io.ArgsName;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringJoiner;
-import java.util.regex.Pattern;
+
 
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
@@ -17,38 +12,52 @@ public class CSVReader {
         String param2 = argsName.get("delimiter");
         String param3 = argsName.get("out");
         String param4 = argsName.get("filter");
-        Scanner scanner = new Scanner(new FileReader(param1)).useDelimiter(param2);
-        System.out.println(scanner.nextLine());
-        System.out.println("_______");
+        Scanner scanner = new Scanner(new FileReader(param1));
+        scanner.useDelimiter(param2);
+        int columnCounter = -1;
+        while (scanner.hasNext()) {
+            String column = scanner.next();
+            if (param4.contains(column)) {
+                columnCounter++;
+            }
+        }
+        scanner.close();
         if (!param3.equals("stdout")) {
             File outFile = new File(param3);
+            System.out.println(outFile.getName());
+            System.out.println(outFile.getAbsolutePath());
             try (PrintWriter out = new PrintWriter(
                     new BufferedOutputStream(
                             new FileOutputStream(outFile)
                     ))) {
-                while (scanner.hasNext()) {
-                    String next = scanner.next();
-                    String next2 = scanner.nextLine();
-                    System.out.println(next2);
-                    System.out.println("Current word is =" + next);
-                    if (param4.contains(next)) {
-                        System.out.println("Here + " + next);
-                        out.print(next);
+                Scanner scanner2 = new Scanner(new FileReader(param1)).useDelimiter(";");
+                while (scanner2.hasNextLine()) {
+                    String line = scanner2.nextLine();
+                    String[] arr = line.split(";");
+                    for (int i = 0; i <= columnCounter; i++) {
+                        System.out.println(arr[i]);
+                        out.print(arr[i]);
                         out.print(";");
-                        out.print(System.lineSeparator());
                     }
+                    out.print(System.lineSeparator());
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         if (param3.equals("stdout")) {
-            while (scanner.hasNext()) {
-                String next = scanner.next();
-                System.out.println(next);
-                if (next.contains(param4)) {
-                    System.out.println(next);
+            Scanner scanner2 = new Scanner(new FileReader(param1)).useDelimiter(";");
+            while (scanner2.hasNextLine()) {
+                String line = scanner2.nextLine();
+                String[] arr = line.split(";");
+                for (int i = 0; i <= columnCounter; i++) {
+                    System.out.print(arr[i]);
+                    System.out.print(";");
                 }
+                System.out.print(System.lineSeparator());
+                }
+            scanner.close();
             }
         }
-        scanner.close();
-    }
+
     }
