@@ -1,0 +1,11 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<warlock>
+    <saved> true </saved>
+    <seed>225</seed>
+    <name>"Loki"</name>
+    <items>
+        <item>"Staff"</item>
+        <item>"Book"</item>
+    </items>
+    <Rpg> classname = "warlock" level = "42"</Rpg>
+</warlock>
