@@ -1,7 +1,5 @@
 package ru.job4j.io.serialization.json;
 
-import ru.job4j.io.serialization.Contact;
-
 import java.util.Arrays;
 
 public class Person {
@@ -17,6 +15,8 @@ public class Person {
         this.statuses = statuses;
     }
 
+
+
     @Override
     public String toString() {
         return "Person{"
@@ -25,5 +25,21 @@ public class Person {
                 + ", contact=" + contact
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
+    }
+
+    public boolean isSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public String[] getStatuses() {
+        return statuses;
     }
 }

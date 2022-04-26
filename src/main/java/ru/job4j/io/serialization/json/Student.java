@@ -1,7 +1,5 @@
 package ru.job4j.io.serialization.json;
 
-import ru.job4j.io.serialization.Contact;
-
 import java.util.Arrays;
 
 public class Student {
