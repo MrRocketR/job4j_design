@@ -1,13 +1,27 @@
 package ru.job4j.io.serialization.xml;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
 
+@XmlRootElement(name = "character")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Character {
-    boolean saved;
-    int seed;
-    String name;
-    String[] items;
-    Rpg createdClass;
+    @XmlAttribute
+    private boolean saved;
+    @XmlAttribute
+    private int seed;
+    @XmlAttribute
+    private String name;
+
+    private Rpg createdClass;
+
+    private String[] items;
+
+    public Character() {
+    }
 
     public Character(boolean saved, int seed, String name, String[] items, Rpg createdClass) {
         this.saved = saved;
