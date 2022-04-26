@@ -18,9 +18,10 @@ public class UsageLog4j {
         int i = 42;
         double d = 5.5d;
         short sh = 2;
+        long l = 20000000;
         boolean boo = true;
         byte someByte = 1;
-        LOG.debug("All together log output {} and {} and {} and {} but then {} {} {} {} ", s, f,
+        LOG.debug("All together log output {} and {} and {} and {} but then {} {} {} {} ", l, f,
                 c, i, d, sh, boo, someByte);
     }
 }
