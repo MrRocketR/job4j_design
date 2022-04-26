@@ -8,10 +8,19 @@ public class UsageLog4j {
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
 
     public static void main(String[] args) {
-        LOG.trace("trace message");
-        LOG.debug("debug message");
-        LOG.info("info message");
-        LOG.warn("warn message");
-        LOG.error("error message");
+        String name = "Petr Arsentev";
+        int age = 33;
+        LOG.debug("User info name : {}, age : {}", name, age);
+        float f = 2.3f;
+        String s = "Hi";
+        LOG.debug("Test debug is {},  and {} ", f, s);
+        char c = 'C';
+        int i = 42;
+        double d = 5.5d;
+        short sh = 2;
+        boolean boo = true;
+        byte someByte = 1;
+        LOG.debug("All together log output {} and {} and {} and {} but then {} {} {} {} ", s, f,
+                c, i, d, sh, boo, someByte);
     }
 }
