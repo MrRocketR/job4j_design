@@ -10,11 +10,18 @@ import java.util.Scanner;
 
 
 public class CSVReader {
-    public static void handle(ArgsName argsName) throws Exception {
+    public static void handle(String[] args) throws Exception {
+        ArgsName argsName = ArgsName.of(args);
         String param1 = argsName.get("path");
+        if (!".csv".contains(param1)) {
+            throw new IllegalArgumentException("Wrong input file format" + param1);
+        }
         String param2 = argsName.get("delimiter");
         String param3 = argsName.get("out");
         String param4 = argsName.get("filter");
+        if (!new File(param1).exists() && !new File(param1).isDirectory()) {
+            throw new IllegalArgumentException("Wrong directory or directory is missing");
+        }
         Scanner scanner = new Scanner(new FileReader(param1));
         String[] firstColumn = scanner.nextLine().split(param2);
         ArrayList<Integer> usefullColumns = new ArrayList<>();
@@ -27,9 +34,9 @@ public class CSVReader {
         Scanner scanner2 = new Scanner(new FileReader(param1));
         if ("stdout".equals(param3)) {
             while (scanner2.hasNextLine()) {
-                String[] column = scanner.nextLine().split(param2);
+                String[] column = scanner2.nextLine().split(param2);
                 for (int i = 0; i < column.length; i++) {
-                    if (usefullColumns.equals(i)) {
+                    if (usefullColumns.contains(i)) {
                         System.out.print(column[i]);
                         System.out.print(";");
                     }
@@ -58,5 +65,11 @@ public class CSVReader {
             }
             scanner2.close();
         }
+    }
+    public static void main(String[] args) throws Exception {
+        if (args.length != 4) {
+            throw new IllegalArgumentException("Wrong number of params");
+        }
+        CSVReader.handle(args);
     }
 }
