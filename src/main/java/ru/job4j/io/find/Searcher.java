@@ -7,6 +7,8 @@ import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Searcher implements FileVisitor<Path> {
     private List<Path> fileList = new ArrayList<>();
@@ -15,8 +17,7 @@ public class Searcher implements FileVisitor<Path> {
     public Searcher(String name) {
         this.name = name;
     }
-
-
+    private Pattern pattern = Pattern.compile(name);
     @Override
     public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
         System.out.println("Searching in dir  " + dir);
@@ -26,7 +27,8 @@ public class Searcher implements FileVisitor<Path> {
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         System.out.println("Current file is " +  file.getFileName());
-        if (file.getFileName().toString().contains(name)) {
+        Matcher matcher = pattern.matcher(file.getFileName().toString());
+        if (matcher.matches()) {
             fileList.add(file);
         }
         return FileVisitResult.CONTINUE;

@@ -26,15 +26,34 @@ public class Find {
         param2 = validator.get("n");
         param3 = validator.get("t");
         param4 = validator.get("o");
-        System.out.println(param1);
-        System.out.println(param2);
-        System.out.println(param3);
-        System.out.println(param4);
         if (!new File(param1).exists() && !new File(param1).isDirectory()) {
             throw new IllegalArgumentException("Wrong directory!");
         }
     }
 
+    private String maskMatches(String mask) {
+        StringBuilder regex = new StringBuilder();
+        for (int i = 0; i < mask.length(); ++i) {
+            final char c = mask.charAt(i);
+            switch (c) {
+                case '*':
+                    regex.append(".*");
+                    break;
+                case '?':
+                    regex.append('.');
+                    break;
+                case '.':
+                    regex.append("\\.");
+                    break;
+                case '\\':
+                    regex.append("\\\\");
+                    break;
+                default:
+                    regex.append(c);
+            }
+        }
+        return regex.toString();
+    }
     public static List<Path> search(String rootDir, String fileName) throws IOException {
         Searcher searcher = new Searcher(fileName);
         Path root = Paths.get(rootDir);
@@ -46,8 +65,10 @@ public class Find {
     public static void main(String[] args) throws IOException {
         Find find = new Find();
         find.paramChecker(args);
+        if ("mask".equals(param3)) {
+                param2 = find.maskMatches(param2);
+        }
         List<Path> fileList = search(param1, param2);
-        System.out.println(fileList);
         Printer.printToFile(param4, fileList);
     }
 }
