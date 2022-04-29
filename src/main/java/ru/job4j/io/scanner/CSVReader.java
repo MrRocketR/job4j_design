@@ -13,8 +13,9 @@ public class CSVReader {
     public static void handle(String[] args) throws Exception {
         ArgsName argsName = ArgsName.of(args);
         String param1 = argsName.get("path");
-        if (!".csv".contains(param1)) {
-            throw new IllegalArgumentException("Wrong input file format" + param1);
+        System.out.println(param1);
+        if (!param1.endsWith(".csv")) {
+            throw new IllegalArgumentException("Wrong input file format " + param1);
         }
         String param2 = argsName.get("delimiter");
         String param3 = argsName.get("out");
