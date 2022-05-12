@@ -1,0 +1,1 @@
+INSERT into items (name, user_id, category_id, state_id) value ();
