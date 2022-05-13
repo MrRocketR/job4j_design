@@ -30,12 +30,14 @@ insert into product (name, price, costumer_id) values ('ipad','30',5);
 select p.name, p.price, c.name, c.money
 from product as p
 join costumer as c
-on p.price <= 30;
+on p.costumer_id = c.id
+where p.price <=30;
 
 select p.name, p.price, c.name, c.money
 from product as p
 join costumer as c
-on p.name = 'ipad';
+on p.costumer_id = c.id
+where p.name = 'ipad';
 
 select distinct p.name, c.name
 from product as p
@@ -47,3 +49,4 @@ from product as p
 join costumer as c
 on p.costumer_id = c.id
 order by p.price desc;
+
