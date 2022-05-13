@@ -1,27 +1,31 @@
+
+CREATE table role (
+id serial primary_key,
+role_type VARCHAR(1)
+);
 CREATE table users (
 id serial primary key,
 name VARCHAR(255),
-password VARCHAR(255)
+password VARCHAR(255),
+role_id int references role(id)  
 );
-CREATE table role (
-id serial primary_key,
-role_type VARCHAR(1),
-user_id int references users(id)  
-);
+
 CREATE table rules (
 id serial primary_key,
-name text,
-user_id int references users(id),
-role_id int references role(id)  	
+name text
 );
+CREATE table roleANDrules (
+id serial primary_key,
+name text,
+user_id int references rules(id),
+role_id int references role(id)
+);
+
 CREATE table state (
 id serial primary_key,	
 status VARCHAR(255)
 );
-CREATE table comments (
-id serial primary_key,	
-comm text
-);
+
 CREATE table category (
 id serial primary_key,	
 name VARCHAR(255)
@@ -41,5 +45,8 @@ img bytea,
 item_id int references items(id)	
 );
 
-
-
+CREATE table comments (
+id serial primary_key,	
+comm text
+item_id int references items(id),
+);
