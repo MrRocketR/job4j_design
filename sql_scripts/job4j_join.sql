@@ -57,5 +57,6 @@ INSERT into teens (name, gender) values ('Dasha', 'F');
 INSERT into teens (name, gender) values ('Oleg', 'M');
 INSERT into teens (name, gender) values ('Anna', 'F');
 
-Select teens.name, t.name, t.gender from teens
-cross join teens t;
+Select teens.name, teens.gender, t.name, t.gender from teens
+cross join teens t
+where teens.gender != t.gender;
