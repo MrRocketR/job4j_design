@@ -25,14 +25,40 @@ INSERT into employees (name, department_id) values ('Petya', 4);
 INSERT into employees (name, department_id) values ('Oleg', 4);
 INSERT into employees (name, department_id) values ('GhostEmployee', null);
 
+
+/*  2. Выполнить запросы с left, right, full, cross соединениями */
+
+SELECT * From employees e
+right join departments d
+on e.department_id = d.id
+
+SELECT * From employees e
+left join departments d
+on e.department_id = d.id
+
+SELECT * From employees e
+full join departments d
+on e.department_id = d.id
+
+SELECT * From employees e
+cross join departments d
+
+
 /* 3. Используя left join найти департаменты, у которых нет работников */
 
 SELECT * From employees e
 right join departments d
 on e.department_id = d.id;
 
+
 /*  4. Используя left и right join написать запросы, которые давали бы одинаковый результат
 (порядок вывода колонок в эти запросах также должен быть идентичный). */
+
+/*
+
+Чтобы сделать идентичный вывод, задайте одинаковый порядок вывода колонок,
+либо в 2 запросах, либо в одном выводите все (*), а во втором уже задаете порядок все колонок. */
+
 
 SELECT * From employees e
 left join departments d
@@ -41,6 +67,11 @@ on e.department_id = d.id;
 SELECT * From departments d
 right join employees e
 on e.department_id = d.id;
+
+SELECT e.id, e.name, e.department_id, d.id, d.name From departments d
+right join employees e
+on e.department_id = d.id;
+
 
 /* 5. Создать таблицу teens с атрибутами name, gender и заполнить ее.
 Используя cross join составить все возможные разнополые пары */
