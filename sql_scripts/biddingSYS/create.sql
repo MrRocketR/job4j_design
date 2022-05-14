@@ -48,5 +48,5 @@ item_id int references items(id)
 CREATE table comments (
 id serial primary key,
 comm text,
-item_id int references items(id),
+item_id int references items(id)
 );
