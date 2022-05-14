@@ -48,7 +48,7 @@ SELECT p.name, p.expired_date, p.price
 from product as p
 inner join type as t
 on p.type_id = t.id
-where t.id = 1;
+where t.name = 'СЫР';
 
 /* 2. Написать запрос получения всех продуктов, у кого в имени есть слово "мороженое" */
 SELECT p.name, p.expired_date, p.price
