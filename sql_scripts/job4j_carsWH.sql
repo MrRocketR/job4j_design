@@ -43,37 +43,27 @@ INSERT into gearbox (name) values ('old strange gearbox');
  /*
 1) Вывести список всех машин и все привязанные к ним детали. Нужно учесть, что каких-то деталей машина может и не содержать.
  */
-Select c.name, b.name
-from car as c
-full join body b
-on c.body_id = b.id
-union
-select c.name, e.name
-from car as c
-full join engine as e
-on c.engine_id = e.id
-union
-select c.name, g.name
-from car as c
-full join gearbox as g
-on c.gearbox_id = g.id
+Select c.name, b.name, e.name, g.name from car c
+left outer join engine e on c.engine_id = e.id
+left outer join body b on c.body_id = b.id
+left outer join gearbox g on c.gearbox_id = g.id
  /*
 2) Вывести отдельно детали (1 деталь - 1 запрос), которые не используются НИ в одной машине, кузова, двигатели, коробки передач.
  */
-Select c.name, b.name
+Select c.name as машина, b.name as кузов
 from car as c
-full join body b
+right join body b
 on c.body_id = b.id
 where c.name is null
-union
-select c.name, e.name
+
+Select c.name as машина, e.name as двигатель
 from car as c
-full join engine as e
+right join engine e
 on c.engine_id = e.id
 where c.name is null
-union
-select c.name, g.name
+
+Select c.name as машина, g.name as коробка
 from car as c
-full join gearbox as g
+right join gearbox g
 on c.gearbox_id = g.id
 where c.name is null
