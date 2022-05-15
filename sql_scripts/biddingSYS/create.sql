@@ -1,7 +1,7 @@
 
 CREATE table role (
 id serial primary key,
-role_type VARCHAR(1)
+role_type VARCHAR(10)
 );
 CREATE table users (
 id serial primary key,
@@ -41,7 +41,7 @@ state_id int references state(id)
 
 CREATE table attachs (
 id serial primary key,
-img bytea,
+name text,
 item_id int references items(id)	
 );
 
