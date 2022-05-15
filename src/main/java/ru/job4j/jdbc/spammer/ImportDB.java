@@ -26,12 +26,18 @@ public class ImportDB {
            String read;
            while ((read = rd.readLine()) != null) {
                String[] arr = read.split(";");
+               validate(arr);
                users.add(new User(arr[0], arr[1]));
            }
         }
         return users;
     }
+    private void validate(String[] arr) {
+        if (arr.length != 2 || arr[0].equals("") || arr[1].equals("")) {
+            throw new IllegalArgumentException("Wrong arguments!");
+        }
 
+    }
     public void save(List<User> users) throws ClassNotFoundException, SQLException {
         Class.forName(cfg.getProperty("jdbc.driver"));
         try (Connection cnt = DriverManager.getConnection(
@@ -63,9 +69,10 @@ public class ImportDB {
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
-        File file =  new File("app.properties");
-        cfg.load(new FileReader(file));
-        ImportDB db = new ImportDB(cfg,  "dump.txt");
+        try (InputStream in = ImportDB.class.getClassLoader().getResourceAsStream("app.properties")) {
+            cfg.load(in);
+        }
+        ImportDB db = new ImportDB(cfg, "./dump.txt");
         db.save(db.load());
     }
 }
