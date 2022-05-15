@@ -46,9 +46,10 @@ cross join departments d
 
 /* 3. Используя left join найти департаменты, у которых нет работников */
 
-SELECT * From employees e
+SELECT e.name as имя_работника, d.name as название_департамента  From employees e
 right join departments d
-on e.department_id = d.id;
+on e.department_id = d.id
+where department_id is null;
 
 
 /*  4. Используя left и right join написать запросы, которые давали бы одинаковый результат
