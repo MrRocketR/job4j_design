@@ -33,7 +33,7 @@ public class ImportDB {
         return users;
     }
     private void validate(String[] arr) {
-        if (arr.length != 2 || arr[0].equals("") || arr[1].equals("")) {
+        if (arr.length != 2 || arr[0].isBlank() || arr[1].isBlank()) {
             throw new IllegalArgumentException("Wrong arguments!");
         }
 
